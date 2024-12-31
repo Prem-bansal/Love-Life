@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy New Year Message</title>
+    <link rel="stylesheet" href="css/date.css" />
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Body Styling */
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+        background-image: url('together.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* Overlay to improve text visibility */
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+        z-index: -1; /* Put overlay behind text */
+      }
+
+      /* Heading Styling with Animation */
+      h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        color: #fff;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        animation: fadeIn 2s forwards 1s; /* Fade-in animation with delay */
+      }
+
+      /* Paragraph Styling with Animation */
+      p {
+        font-size: 1.5em;
+        color: #fff;
+        text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+        margin-bottom: 30px;
+        opacity: 0;
+        animation: fadeIn 2s forwards 2s; /* Fade-in animation with delay */
+      }
+
+      /* Highlighted Text */
+      .highlight {
+        font-weight: bold;
+        color: #ff0;
+      }
+
+      /* Heart Animation (Pumping) */
+      .heart {
+        font-size: 4em;
+        color: #ff0000;
+        cursor: pointer;
+        animation: pumpHeart 1.5s infinite ease-in-out; /* Continuous pumping effect */
+        margin-top: 40px;
+      }
+
+      /* Heart Hover Effect */
+      .heart:hover {
+        transform: scale(1.2);
+      }
+
+      /* Keyframe for Heart Pumping Animation */
+      @keyframes pumpHeart {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Gift Image Styling (Pop-up) */
+      #giftImage {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 600px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        cursor: pointer;
+        border: 10px solid #fff;
+        border-radius: 10px;
+      }
+
+      /* "Read Again" Button */
+      .read-again-btn {
+        display: none;
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        background-color: #ff6600;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .read-again-btn:hover {
+        background-color: #ff4500;
+      }
+
+      /* Fade-in animation */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* Responsive Layout */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2em;
+        }
+
+        p {
+          font-size: 1.2em;
+        }
+
+        .heart {
+          font-size: 3em;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 1.5em;
+        }
+
+        p {
+          font-size: 1em;
+        }
+
+        .heart {
+          font-size: 2.5em;
+        }
+
+        #giftImage {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Overlay to improve text visibility -->
+    <div class="overlay"></div>
+
+    <h1>So wanted to start my new year with YOU!!</h1>
+    <p>
+      See, akhir kaar humne ladte jhagadte ek saal aur complete kar hi liya, aur promise karo aane wale baki saal bhi saath hi rahenge, kuch bhi ho, baith kar problem solve karenge, 
+      <span class="highlight">chhorna is not the solution!!</span> 💪❤️
+    </p>
+    <p>No matter what, we’ll always have each other’s back! 💕</p>
+    <p>
+      Happy New Year with all my love, my Love! 🥂✨ May this year bring us even closer, and make our bond stronger than ever! 🥰🌟 Let’s make this year ours! 💖
+    </p>
+
+    <!-- Heart icon to click -->
+    <div class="heart" onclick="showGiftImage()">♥️ Click on the heart for a special gift!</div>
+
+    <!-- Hidden gift image that will be shown when heart is clicked -->
+    <img id="giftImage" src="we.jpeg" alt="Gift Image" onclick="closeGiftImage()">
+
+    <!-- Read Again Button that appears after image is shown -->
+    <button class="read-again-btn" onclick="closeGiftImage()">Read Again</button>
+
+    <!-- Background Music (Hidden) -->
+    <audio id="bgm" autoplay loop>
+      <source src="song.mp3" type="audio/mp3" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <script>
+      // Function to display the gift image and the "Read Again" button
+      function showGiftImage() {
+        document.getElementById('giftImage').style.display = 'block';
+        document.querySelector('.read-again-btn').style.display = 'inline-block';
+      }
+
+      // Function to close the gift image when clicked
+      function closeGiftImage() {
+        document.getElementById('giftImage').style.display = 'none';
+        document.querySelector('.read-again-btn').style.display = 'none';
+      }
+    </script>
+  </body>
+</html>
