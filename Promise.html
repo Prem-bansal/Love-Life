@@ -1,214 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happy New Year Message</title>
-    <link rel="stylesheet" href="css/date.css" />
-    <style>
-      /* General Reset */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy New Year Message</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      /* Body Styling */
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 50px;
-        background-image: url('together.jpeg');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        overflow-x: hidden;
-        position: relative;
-      }
+    /* Body Styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-image: url('together.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-      /* Overlay to improve text visibility */
-      .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-        z-index: -1; /* Put overlay behind text */
-      }
+    /* Overlay to improve text visibility */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
 
-      /* Heading Styling with Animation */
+    /* Heading Styling with Animation */
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      animation: fadeIn 2s forwards 1s;
+    }
+
+    /* Paragraph Styling with Animation */
+    p {
+      font-size: 1.5em;
+      color: #fff;
+      text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeIn 2s forwards 2s;
+    }
+
+    /* Highlighted Text */
+    .highlight {
+      font-weight: bold;
+      color: #ff0;
+    }
+
+    /* Heart Animation (Pumping) */
+    .heart {
+      font-size: 4em;
+      color: #ff0000;
+      cursor: pointer;
+      animation: pumpHeart 1.5s infinite ease-in-out;
+      margin-top: 40px;
+    }
+
+    /* Heart Hover Effect */
+    .heart:hover {
+      transform: scale(1.2);
+    }
+
+    /* Keyframe for Heart Pumping Animation */
+    @keyframes pumpHeart {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Image Slider Styling */
+    .slider-container {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 600px;
+      z-index: 1000;
+      overflow: hidden;
+      border: 10px solid #fff;
+      border-radius: 20px;
+      height: 500px;
+      position: relative;
+    }
+
+    /* Horizontal Slider Adjustment */
+    .slider {
+      display: flex;
+      flex-direction: row; /* Horizontal alignment */
+      height: 100%;
+      transition: transform 1s ease; /* Smooth transition */
+    }
+
+    .slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px; /* Rounded corners for the images */
+    }
+
+    /* Navigation buttons (Previous/Next) */
+    .prev,
+    .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 2em;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 50%; /* Round buttons */
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    /* "Read Again" Button */
+    .read-again-btn {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background-color: #ff6600;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .read-again-btn:hover {
+      background-color: #ff4500;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Heart Sprinkle Effect */
+    #sprinkles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display: none;
+    }
+
+    .sprinkle {
+      position: absolute;
+      font-size: 24px;
+      opacity: 0.8;
+      animation: sprinkleAnimation 4.5s ease-in-out forwards;
+    }
+
+    @keyframes sprinkleAnimation {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0; /* Makes the sprinkle fade as it moves */
+      }
+    }
+
+    /* Responsive Layout */
+    @media (max-width: 768px) {
       h1 {
-        font-size: 2.5em;
-        margin-bottom: 20px;
-        color: #fff;
-        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-        opacity: 0;
-        animation: fadeIn 2s forwards 1s; /* Fade-in animation with delay */
+        font-size: 2em;
       }
 
-      /* Paragraph Styling with Animation */
       p {
-        font-size: 1.5em;
-        color: #fff;
-        text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
-        margin-bottom: 30px;
-        opacity: 0;
-        animation: fadeIn 2s forwards 2s; /* Fade-in animation with delay */
-      }
-
-      /* Highlighted Text */
-      .highlight {
-        font-weight: bold;
-        color: #ff0;
-      }
-
-      /* Heart Animation (Pumping) */
-      .heart {
-        font-size: 4em;
-        color: #ff0000;
-        cursor: pointer;
-        animation: pumpHeart 1.5s infinite ease-in-out; /* Continuous pumping effect */
-        margin-top: 40px;
-      }
-
-      /* Heart Hover Effect */
-      .heart:hover {
-        transform: scale(1.2);
-      }
-
-      /* Keyframe for Heart Pumping Animation */
-      @keyframes pumpHeart {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.1);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
-
-      /* Gift Image Styling (Pop-up) */
-      #giftImage {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 80%;
-        max-width: 600px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-        cursor: pointer;
-        border: 10px solid #fff;
-        border-radius: 10px;
-      }
-
-      /* "Read Again" Button */
-      .read-again-btn {
-        display: none;
-        margin-top: 20px;
-        padding: 10px 20px;
         font-size: 1.2em;
-        background-color: #ff6600;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
       }
 
-      .read-again-btn:hover {
-        background-color: #ff4500;
+      .heart {
+        font-size: 3em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5em;
       }
 
-      /* Fade-in animation */
-      @keyframes fadeIn {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
+      p {
+        font-size: 1em;
       }
 
-      /* Responsive Layout */
-      @media (max-width: 768px) {
-        h1 {
-          font-size: 2em;
-        }
-
-        p {
-          font-size: 1.2em;
-        }
-
-        .heart {
-          font-size: 3em;
-        }
+      .heart {
+        font-size: 2.5em;
       }
 
-      @media (max-width: 480px) {
-        h1 {
-          font-size: 1.5em;
-        }
-
-        p {
-          font-size: 1em;
-        }
-
-        .heart {
-          font-size: 2.5em;
-        }
-
-        #giftImage {
-          width: 100%;
-        }
+      .slider-container {
+        width: 100%;
       }
-    </style>
-  </head>
-  <body>
-    <!-- Overlay to improve text visibility -->
-    <div class="overlay"></div>
+    }
+  </style>
+</head>
+<body>
+  <!-- Overlay to improve text visibility -->
+  <div class="overlay"></div>
 
-    <h1>So wanted to start my new year with YOU!!</h1>
-    <p>
-      See, akhir kaar humne ladte jhagadte ek saal aur complete kar hi liya, aur promise karo aane wale baki saal bhi saath hi rahenge, kuch bhi ho, baith kar problem solve karenge, 
-      <span class="highlight">chhorna is not the solution!!</span> 💪❤️
-    </p>
-    <p>No matter what, we’ll always have each other’s back! 💕</p>
-    <p>
-      Happy New Year with all my love, my Love! 🥂✨ May this year bring us even closer, and make our bond stronger than ever! 🥰🌟 Let’s make this year ours! 💖
-    </p>
+  <h1>So wanted to start my new year with YOU!!</h1>
+  <p>
+    See, akhir kaar humne ladte jhagadte ek saal aur complete kar hi liya, aur promise karo aane wale baki saal bhi saath hi rahenge, kuch bhi ho, baith kar problem solve karenge, 
+    <span class="highlight">chhorna is not the solution!!</span> 💪❤️
+  </p>
+  <p>No matter what, we’ll always have each other’s back! 💕</p>
+  <p>
+    Happy New Year with all my love, my Love! 🥂✨ May this year bring us even closer, and make our bond stronger than ever! 🥰🌟 Let’s make this year ours! 💖
+  </p>
 
-    <!-- Heart icon to click -->
-    <div class="heart" onclick="showGiftImage()">♥️ Click on the heart for a special gift!</div>
+  <!-- Heart icon to click -->
+  <div class="heart" id="heart" onclick="showPartyBumper()">♥️ Click on the heart for a special gift!</div>
 
-    <!-- Hidden gift image that will be shown when heart is clicked -->
-    <img id="giftImage" src="we.jpeg" alt="Gift Image" onclick="closeGiftImage()">
+  <!-- Image slider container -->
+  <div class="slider-container" id="giftSlider">
+    <div class="slider">
+      <img src="image1.jpeg" alt="Gift Image 1">
+      <img src="image2.jpeg" alt="Gift Image 2">
+      <img src="image3.jpeg" alt="Gift Image 3">
+      <!-- Add more images as needed -->
+    </div>
 
-    <!-- Read Again Button that appears after image is shown -->
-    <button class="read-again-btn" onclick="closeGiftImage()">Read Again</button>
+    <!-- Navigation buttons -->
+    <button class="prev" onclick="prevImage()">❮</button>
+    <button class="next" onclick="nextImage()">❯</button>
+  </div>
 
-    <!-- Background Music (Hidden) -->
-    <audio id="bgm" autoplay loop>
-      <source src="Song.mp3" type="audio/mp3" />
-      Your browser does not support the audio element.
-    </audio>
+  <!-- Read Again Button -->
+  <button class="read-again-btn" onclick="closeGiftSlider()">Read Again</button>
 
-    <script>
-      // Function to display the gift image and the "Read Again" button
-      function showGiftImage() {
-        document.getElementById('giftImage').style.display = 'block';
-        document.querySelector('.read-again-btn').style.display = 'inline-block';
-      }
+  <!-- Confetti / Heart Sprinkles Effect -->
+  <div id="sprinkles"></div>
 
-      // Function to close the gift image when clicked
-      function closeGiftImage() {
-        document.getElementById('giftImage').style.display = 'none';
-        document.querySelector('.read-again-btn').style.display = 'none';
-      }
-    </script>
-  </body>
+  <!-- Background Music -->
+  <audio id="bgm" autoplay loop>
+    <source src="Song1.mp3" type="audio/mp3" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    let currentImageIndex = 0;
+    const slider = document.querySelector('.slider');
+    const totalImages = document.querySelectorAll('.slider img').length;
+    let sprinkleInterval;
+
+    // Function to show the image slider
+    function showGiftSlider() {
+      document.getElementById('giftSlider').style.display = 'block';
+      document.querySelector('.read-again-btn').style.display = 'inline-block';
+      startSprinkles(); // Start the sprinkle effect
+      autoSlide(); // Start auto slider
+    }
+
+    // Function to start the auto slider
+    function autoSlide() {
+      setInterval(() => {
+        nextImage();
+      }, 3000); // Slide every 3 seconds
+    }
+
+    // Function for the next image transition
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % totalImages;
+      updateSliderPosition();
+    }
+
+    // Function for the previous image transition
+    function prevImage() {
+      currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;
+      updateSliderPosition();
+    }
+
+    // Function to update the slider position smoothly
+    function updateSliderPosition() {
+      const offset = -currentImageIndex * 100;
+      slider.style.transform = `translateX(${offset}%)`; // Translate in the X direction
+    }
+
+    // Function to close the slider
+    function closeGiftSlider() {
+      document.getElementById('giftSlider').style.display = 'none';
+      document.querySelector('.read-again-btn').style.display = 'none';
+      stopSprinkles(); // Stop the sprinkle effect
+    }
+
+    // Start sprinkle effect with heart-shaped confetti
+    function startSprinkles() {
+      const sprinklesContainer = document.getElementById('sprinkles');
+      sprinklesContainer.style.display = 'block';
+
+      sprinkleInterval = setInterval(() => {
+        const sprinkle = document.createElement('div');
+        sprinkle.classList.add('sprinkle');
+        sprinkle.textContent = '💖'; // Heart emoji as confetti
+        sprinkle.style.left = `${Math.random() * 100}%`; // Random left position
+        sprinkle.style.animationDelay = `${Math.random() * 2}s`; // Random delay
+        sprinklesContainer.appendChild(sprinkle);
+
+        setTimeout(() => {
+          sprinkle.remove();
+        }, 3000); // Remove the sprinkle after it falls
+      }, 100); // Add a new sprinkle every 100ms
+    }
+
+    // Stop sprinkle effect
+    function stopSprinkles() {
+      clearInterval(sprinkleInterval);
+      const sprinklesContainer = document.getElementById('sprinkles');
+      sprinklesContainer.innerHTML = ''; // Clear the sprinkles
+      sprinklesContainer.style.display = 'none';
+    }
+
+    // Function to handle heart click (party popper effect)
+    function showPartyBumper() {
+      // Trigger the heart sprinkle effect
+      startSprinkles(); 
+      showGiftSlider(); // Show the image slider
+    }
+  </script>
+</body>
 </html>
