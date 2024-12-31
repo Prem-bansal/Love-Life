@@ -276,10 +276,12 @@
   <div id="sprinkles"></div>
 
   <!-- Background Music -->
-  <audio id="bgm" autoplay loop>
+  <audio id="bgm" preload="auto">
     <source src="Song1.mp3" type="audio/mp3" />
+    <source src="Song1.ogg" type="audio/ogg" />
+    <source src="Song1.wav" type="audio/wav" />
     Your browser does not support the audio element.
-  </audio>
+</audio>
 
   <script>
     let currentImageIndex = 0;
