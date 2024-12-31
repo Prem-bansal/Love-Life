@@ -93,17 +93,17 @@
     .slider-container {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
+      top: 10%;
+      left: 10%;
+      right: 10%;
       z-index: 1000;
       overflow: hidden;
       border-radius: 20px;
       background-color: rgba(0, 0, 0, 0.8);  /* Slight background */
       padding: 20px;
+      max-width: 600px; /* Reduced size */
+      width: 100%;
+      height: 60%;
     }
 
     /* Horizontal Slider Adjustment */
@@ -182,11 +182,12 @@
       height: 100%;
       pointer-events: none;
       display: none;
+      z-index: 1100; /* Ensure it stays on top */
     }
 
     .sprinkle {
       position: absolute;
-      font-size: 24px;
+      font-size: 30px; /* Heart sprinkle size */
       opacity: 0.8;
       animation: sprinkleAnimation 4.5s ease-in-out forwards;
     }
@@ -209,7 +210,13 @@
       }
 
       .slider-container {
-        padding: 10px; /* Reduced padding for more coverage on mobile */
+        top: 5%;
+        left: 5%;
+        right: 5%;
+        bottom: 5%;
+        padding: 10px;
+        max-width: 80%;
+        height: 55%;
       }
     }
 
@@ -219,7 +226,13 @@
       }
 
       .slider-container {
-        padding: 5px;  /* Even less padding on smaller devices */
+        top: 5%;
+        left: 5%;
+        right: 5%;
+        bottom: 5%;
+        padding: 5px;
+        max-width: 90%;
+        height: 50%;
       }
     }
   </style>
@@ -247,6 +260,7 @@
       <img src="image1.jpeg" alt="Gift Image 1">
       <img src="image2.jpeg" alt="Gift Image 2">
       <img src="image3.jpeg" alt="Gift Image 3">
+      <img src="image4.jpeg" alt="Gift Image 3">
       <!-- Add more images as needed -->
     </div>
 
@@ -276,8 +290,9 @@
     // Function to show the image slider
     function showGiftSlider() {
       document.getElementById('giftSlider').style.display = 'block';
+      document.getElementById('sprinkles').style.display = 'block';
+      sprinkleHearts(); // Start sprinkle effect
       document.querySelector('.read-again-btn').style.display = 'inline-block';
-      startSprinkles(); // Start the sprinkle effect
       autoSlide(); // Start auto slider
     }
 
@@ -290,13 +305,13 @@
 
     // Function for the next image transition
     function nextImage() {
-      currentImageIndex = (currentImageIndex + 1) % totalImages;
+      currentImageIndex = (currentImageIndex + 1) % totalImages;  // Ensures no overflow
       updateSliderPosition();
     }
 
     // Function for the previous image transition
     function prevImage() {
-      currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;
+      currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;  // Ensures no overflow
       updateSliderPosition();
     }
 
@@ -309,42 +324,29 @@
     // Function to close the slider
     function closeGiftSlider() {
       document.getElementById('giftSlider').style.display = 'none';
+      document.getElementById('sprinkles').style.display = 'none';
+      clearInterval(sprinkleInterval);  // Stop sprinkle effect
       document.querySelector('.read-again-btn').style.display = 'none';
-      stopSprinkles(); // Stop the sprinkle effect
     }
 
-    // Start sprinkle effect with heart-shaped confetti
-    function startSprinkles() {
-      const sprinklesContainer = document.getElementById('sprinkles');
-      sprinklesContainer.style.display = 'block';
-
-      sprinkleInterval = setInterval(() => {
+    // Sprinkle heart animation
+    function sprinkleHearts() {
+      sprinkleInterval = setInterval(function() {
         const sprinkle = document.createElement('div');
         sprinkle.classList.add('sprinkle');
-        sprinkle.textContent = '💖'; // Heart emoji as confetti
-        sprinkle.style.left = `${Math.random() * 100}%`; // Random left position
-        sprinkle.style.animationDelay = `${Math.random() * 2}s`; // Random delay
-        sprinklesContainer.appendChild(sprinkle);
+        sprinkle.textContent = '💖'; // Heart emoji for sprinkle
+        sprinkle.style.left = Math.random() * 100 + '%';
+        sprinkle.style.animationDuration = Math.random() * 2 + 3 + 's'; // Randomize fall speed
+        document.getElementById('sprinkles').appendChild(sprinkle);
 
-        setTimeout(() => {
-          sprinkle.remove();
-        }, 3000); // Remove the sprinkle after it falls
-      }, 100); // Add a new sprinkle every 100ms
-    }
-
-    // Stop sprinkle effect
-    function stopSprinkles() {
-      clearInterval(sprinkleInterval);
-      const sprinklesContainer = document.getElementById('sprinkles');
-      sprinklesContainer.innerHTML = ''; // Clear the sprinkles
-      sprinklesContainer.style.display = 'none';
+        // Remove sprinkles after animation is done
+        sprinkle.addEventListener('animationend', () => sprinkle.remove());
+      }, 300); // Sprinkle every 300ms
     }
 
     // Function to handle heart click (party popper effect)
     function showPartyBumper() {
-      // Trigger the heart sprinkle effect
-      startSprinkles(); 
-      showGiftSlider(); // Show the image slider
+      showGiftSlider();
     }
   </script>
 </body>
